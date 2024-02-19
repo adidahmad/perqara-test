@@ -1,0 +1,172 @@
+definitions:
+  domain.Users:
+    properties:
+      created_at:
+        type: string
+      email:
+        type: string
+      id:
+        type: integer
+      is_active:
+        type: boolean
+      password:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  users.CreateRequest:
+    properties:
+      email:
+        type: string
+      password:
+        minLength: 8
+        type: string
+    required:
+    - email
+    - password
+    type: object
+  users.UpdateRequest:
+    properties:
+      email:
+        type: string
+      is_active:
+        type: boolean
+      password:
+        type: string
+    required:
+    - email
+    type: object
+  users.errResponse:
+    properties:
+      message:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /users:
+    get:
+      consumes:
+      - application/json
+      description: Get list user
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/domain.Users'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/users.errResponse'
+      summary: Get List user
+      tags:
+      - Users
+    post:
+      consumes:
+      - application/json
+      description: Create a new user with the provided email and password
+      parameters:
+      - description: User data
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/users.CreateRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/domain.Users'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/users.errResponse'
+      summary: Create a new user
+      tags:
+      - Users
+  /users/:id:
+    delete:
+      consumes:
+      - application/json
+      description: Delete user by id
+      parameters:
+      - description: user id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/domain.Users'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/users.errResponse'
+      summary: Delete User By ID
+      tags:
+      - Users
+    get:
+      consumes:
+      - application/json
+      description: Get user by id
+      parameters:
+      - description: user id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/domain.Users'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/users.errResponse'
+      summary: Get User By ID
+      tags:
+      - Users
+    put:
+      consumes:
+      - application/json
+      description: Update user by id with the provided email and password
+      parameters:
+      - description: User data
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/users.UpdateRequest'
+      - description: user id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/domain.Users'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/users.errResponse'
+      summary: Update User By ID
+      tags:
+      - Users
+swagger: "2.0"

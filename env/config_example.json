@@ -1,0 +1,18 @@
+{
+    "debug_mode": true,
+    "port": "1125",
+    "database": {
+        "perqara_mysql": {
+            "host": "host",
+            "user": "user",
+            "password": "password",
+            "db_name": "dbname",
+            "port": 3306,
+            "pool": {
+                "max_open_conns": 100,
+                "max_idle_conns": 10,
+                "max_lifetime": 300
+            }
+        }
+    }
+}
