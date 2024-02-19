@@ -70,7 +70,6 @@ cp env/config_example.json env/config.json
 ├── config # Manages how to parse configuration files
 │   ├── config.go
 │   ├── database.go
-│   └── jwt.go
 ├── core # The core logic of the application, divided into separate modules.
 │   └── users
 │       ├── domain # contains domain models/entities representing core business concepts
